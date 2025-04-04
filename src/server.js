@@ -13,6 +13,14 @@ app.use("/files", express.static(uploadConfigs.UPLOADS_FOLDER));
 app.use(express.json());
 app.use(routes);
 
+app.get('/health', (req, res)=> {
+   return res.json({message: "server is running"})
+})
+
+app.head('/health', (req, res)=> {
+   return res.json({message: "server is running"})
+})
+
 app.use(( error, request, response, next)=>{
  if(error instanceof AppError){
  return response.status(error.statusCode).json({
